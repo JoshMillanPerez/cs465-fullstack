@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Gale Reef",
+        "image": "reef1.jpg",
+        "description": "<p> gale words"
+    },
+    {
+        "name": "Daveson's Reef",
+        "image": "reef2.jpg",
+        "description": "<p> Dave words"
+    },
+    {
+        "name": "Claire's Reef",
+        "image": "reef3.jpg",
+        "description": "<p> Claire words"
+    }
+]
