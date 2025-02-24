@@ -31,6 +31,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api', (req, res, next) => {
+  res.header('Access-Control-Allow_Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow_Headers', 'Origin, X-Requested-With, Content-Type');
+  res.header('Access-Control-Allow_Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
+
 //wire-up Routees to controllers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
