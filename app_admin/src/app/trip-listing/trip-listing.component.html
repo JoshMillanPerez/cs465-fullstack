@@ -1,9 +1,21 @@
-<!--<pre>{{trips|json}}</pre> -->
 <div>
-    <button (click)="addTrip()" class="btn btn info">Add Trip</button>
-</div>
-<div class="row">
-    <div *ngFor="let trip of trips">
-        <app-trip-card [trip]="trip" class="card-deck mt-2"></app-trip-card>
+    <app-navbar></app-navbar>
+    <div class="container">
+        <h2>Trips</h2>
+        <p>{{message}}</p>
+        <button *ngIf="isLoggedIn()" (click)="addTrip()" class="btn btn-primary mb-3">Add Trip</button>
+        <div *ngIf="trips.length === 0">No trips available.</div>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let trip of trips">
+                <div class="card mb-3">
+                    <img [src]="getImageUrl(trip.image)" class="card-img-top" alt="{{ trip.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ trip.name }}</h5>
+                        <p class="card-text">{{ trip.description }}</p>
+                        <button *ngIf="isLoggedIn()" (click)="editTrip(trip)" class="btn btn-info">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

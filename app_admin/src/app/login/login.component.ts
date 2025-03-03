@@ -25,7 +25,10 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Reset form on init
+    this.credentials = { name: '', email: '', password: '' };
+  }
 
   public onLoginSubmit(): void {
     console.log('Form submitted with:', this.credentials);
@@ -42,16 +45,12 @@ export class LoginComponent implements OnInit {
     console.log('Attempting login...');
     this.authenticationService.login(this.credentials)
       .then(() => {
-        console.log('Login successful, navigating...');
-        this.router.navigateByUrl('/');
+        console.log('Login successful, token:', this.authenticationService.getToken());
+        this.router.navigate(['/list-trips']);
       })
-      .catch((message) => {
-        console.error('Login error:', message);
-        this.formError = message;
+      .catch((error) => {
+        console.error('Login error:', error);
+        this.formError = error.message || 'Login failed';
       });
-  }
-
-  public onButtonClick(): void {
-    console.log('Button clicked'); // Debug logging for button click
   }
 }

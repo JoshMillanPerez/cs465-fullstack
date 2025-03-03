@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="background">
+        <div id="page">
+            {{> header}}
+            <div id="contents">
+                <div class="box">
+                    <div>
+                        <div class="body">
+                            <h1>{{trip.name}}</h1>
+                            <p><strong>Code:</strong> {{trip.code}}</p>
+                            <p><strong>Length:</strong> {{trip.length}}</p>
+                            <p><strong>Start Date:</strong> {{trip.start}}</p>
+                            <p><strong>Resort:</strong> {{trip.resort}}</p>
+                            <p><strong>Price per Person:</strong> {{trip.perPerson}}</p>
+                            <p><strong>Description:</strong> {{trip.description}}</p>
+                            <img src="/images/{{trip.image}}" alt="{{trip.name}}">
+                            <a href="/travel">Back to Travel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{> footer}}
+        </div>
+    </div>
+</body>
+</html>

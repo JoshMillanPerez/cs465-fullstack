@@ -9,7 +9,7 @@ export const trips: Trip[] = [
     "resort": "Emerald Bay, 3 starts",
     "perPerson": "799.00",
     "image": "reef1.jpg",
-    "description": "<p>Gale words"
+    "description": "Gale words"
   },
   {
     "code": "DWAR210315",
@@ -19,7 +19,7 @@ export const trips: Trip[] = [
     "resort": "Blue Lagoon, 4 starts",
     "perPerson": "1199.00",
     "image": "reef2.jpg",
-    "description": "<p> Dave words"
+    "description": "Dave words"
   },
   {
     "code": "CLAR210621",
@@ -29,6 +29,6 @@ export const trips: Trip[] = [
     "resort": "Coral Sands, 5 starts",
     "perPerson": "1999.00",
     "image": "reef3.jpg",
-    "description": "<p> Claire words"
+    "description": "Claire words"
   }
 ];

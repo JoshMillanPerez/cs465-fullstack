@@ -22,22 +22,32 @@ export class AuthenticationService {
     this.storage.setItem('travlr-token', token);
   }
 
-  public login(user: User): Promise<void> {
-    return this.tripDataService.login(user)
-      .then((authResp: AuthResponse) => {
-        if (authResp.token) {
-          this.saveToken(authResp.token);
-        }
-      });
+  public async login(user: User): Promise<void> {
+    try {
+      const authResp = await this.tripDataService.login(user);
+      if (authResp && authResp.token) {
+        this.saveToken(authResp.token);
+        console.log('Token saved:', authResp.token);
+      } else {
+        throw new Error('No token received from login');
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
-  public register(user: User): Promise<void> {
-    return this.tripDataService.register(user)
-      .then((authResp: AuthResponse) => {
-        if (authResp.token) {
-          this.saveToken(authResp.token);
-        }
-      });
+  public async register(user: User): Promise<void> {
+    try {
+      const authResp = await this.tripDataService.register(user);
+      if (authResp && authResp.token) {
+        this.saveToken(authResp.token);
+        console.log('Token saved:', authResp.token);
+      } else {
+        throw new Error('No token received from register');
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   public logout(): void {
@@ -51,7 +61,7 @@ export class AuthenticationService {
         const payload = JSON.parse(atob(token.split('.')[1]));
         return payload.exp > (Date.now() / 1000);
       } catch (e) {
-        return false; // Invalid token format
+        return false;
       }
     }
     return false;
@@ -64,9 +74,9 @@ export class AuthenticationService {
         const { email, name } = JSON.parse(atob(token.split('.')[1]));
         return { email, name } as User;
       } catch (e) {
-        return null; // Invalid token format
+        return null;
       }
     }
-    return null; // Changed from empty return to explicit null
+    return null;
   }
 }

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+    <meta charset="UTF-8">
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    {{{body}}}
-  </body>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>{{trip.name}}</h1>
+    <p>{{trip.description}}</p>
+    <img src="images/{{trip.image}}" alt="{{trip.name}}">
+    <a href="/travel">Back</a>
+</body>
 </html>
-

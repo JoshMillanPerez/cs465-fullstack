@@ -1,20 +1,19 @@
-<!-- src/app/home/home.component.html -->
 <div>
-    <app-navbar></app-navbar>
-    <div class="container">
-      <h2>Trips</h2>
-      <div *ngIf="trips.length === 0">No trips available.</div>
-      <div class="row">
-        <div class="col-md-4" *ngFor="let trip of trips">
-          <div class="card mb-3">
-            <img [src]="trip.image || 'assets/images/default-trip.jpg'" 
-                 class="card-img-top" alt="{{ trip.name }}">
-            <div class="card-body">
-              <h5 class="card-title">{{ trip.name }}</h5>
-              <p class="card-text">{{ trip.description }}</p>
-            </div>
+  <app-navbar></app-navbar>
+  <div class="container">
+    <h2>Trips</h2>
+    <p>{{message}}</p>
+    <div *ngIf="trips.length === 0">No trips available.</div>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let trip of trips">
+        <div class="card mb-3">
+          <img [src]="getImageUrl(trip.image)" class="card-img-top" alt="{{ trip.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ trip.name }}</h5>
+            <p class="card-text">{{ trip.description }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

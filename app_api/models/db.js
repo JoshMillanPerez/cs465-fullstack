@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('dotenv').config(); // Ensure environment variables are loaded
 const host = process.env.DB_HOST || '127.0.0.1';
 const dbURI = `mongodb://${host}/travlr`;
 const readLine = require('readline');
@@ -9,12 +10,12 @@ const connect = async () => {
         await mongoose.connect(dbURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000, // Wait up to 5 seconds to connect
+            serverSelectionTimeoutMS: 5000,
         });
         console.log(`Mongoose connected to ${dbURI}`);
     } catch (err) {
         console.log('Mongoose connection error:', err);
-        setTimeout(connect, 5000); // Retry after 5 seconds if connection fails
+        setTimeout(connect, 5000);
     }
 };
 
@@ -31,13 +32,13 @@ mongoose.connection.on('disconnected', () => {
     console.log('Mongoose disconnected');
 });
 
-// Windows specific listener
+// Windows-specific listener
 if (process.platform === 'win32') {
-    const r1 = readLine.createInterface({
+    const rl = readLine.createInterface({
         input: process.stdin,
         output: process.stdout
     });
-    r1.on('SIGINT', () => {
+    rl.on('SIGINT', () => {
         process.emit('SIGINT');
     });
 }
@@ -69,5 +70,7 @@ process.on('SIGTERM', () => {
 connect();
 
 // Import models
-require('./travlr'); // Ensure your models are imported after DB connection
+require('./user');   // Load the users model
+require('./travlr');  // Load the trips model (adjust to './trips' if renamed)
+
 module.exports = mongoose;

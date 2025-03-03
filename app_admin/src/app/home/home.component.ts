@@ -14,6 +14,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class HomeComponent implements OnInit {
   trips: Trip[] = [];
+  message: string = '';
 
   constructor(
     private tripDataService: TripDataService,
@@ -28,17 +29,24 @@ export class HomeComponent implements OnInit {
     this.tripDataService.getTrips()
       .subscribe({
         next: (trips: Trip[]) => {
-          console.log('Trips loaded:', trips);
           this.trips = trips;
+          this.message = trips.length > 0 ? `There are ${trips.length} trips available.` : 'No trips retrieved';
+          console.log(this.message);
+          console.log('Trips loaded:', trips);
         },
         error: (error) => {
           console.error('Error loading trips:', error);
           this.trips = [];
+          this.message = 'Error fetching trips';
         }
       });
   }
 
   isLoggedIn(): boolean {
     return this.authenticationService.isLoggedIn();
+  }
+
+  getImageUrl(image: string): string {
+    return image ? `http://localhost:3000/images/${image}` : 'assets/images/default-trip.jpg';
   }
 }
